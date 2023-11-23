@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    
+    body {
+      
+      background-image: url('../../assets/img/home.jpg');
+      background-size: cover;
+      background-position: center;
+      height: auto;
+    }
+
+    .center-btn {
+  display: block;
+  margin: auto;
+  place-items: center;
+ 
+} 
+
+
+
+  </style>
+</head>
+
+<body>
+<app-navbar></app-navbar>
+
+
+
+        <div class="my-6 container formContainer" style="background-color: transparent ">
+    <h2 class="text-center" style="font-family: 'Times New Roman', serif; color: rgb(26, 26, 26); font-size: 24px; font-weight: bold; text-transform: uppercase;">Booking</h2>
+      <form (ngSubmit)="onSubmit()" class="mt-4">
+        
+       <div class="form-group">
+            <label for="userName" class="form-label" style="font-family: 'Times New Roman', serif; color: rgb(21, 21, 21); font-size: 16px; font-weight: bold;">Passenger Name</label>
+            <input type="text" [(ngModel)]="userName" class="form-control" id="userName"  name="userName">
+        </div>
+        <div class="form-group">
+            <label for="age" class="form-label" style="font-family:'Times New Roman', serif; color: rgb(15, 15, 15); font-size: 16px; font-weight: bold;">Age</label>
+            <input type="text" class="form-control" id="age" name="age" [(ngModel)]="age">
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label" style="font-family:'Times New Roman', serif; color: rgb(15, 15, 15); font-size: 16px; font-weight: bold;">Email</label>
+          <input type="text" class="form-control" id="uemail" name="uemail" [(ngModel)]="uemail">
+      </div>
+        <div class="form-group">
+            <label for="gender" class="form-label" style="font-family: 'Times New Roman', serif; color: rgb(5, 5, 5); font-size: 16px; font-weight: bold;">Gender</label>
+            <select class="form-control" id="gender" name="gender" [(ngModel)]="gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+          </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="ticketType" class="form-label" style="font-family: 'Times New Roman', serif; color: rgb(5, 5, 5); font-size: 16px; font-weight: bold; ">Ticket Type</label>
+            <select class="form-control" id="ticketType" name="ticketType" [(ngModel)]="ticketType">
+                <option value="SL">SL</option>
+                <option value="AC1">AC1</option>
+                <option value="AC2">AC2</option>
+                <option value="AC3">AC3</option>
+                <option value="G">G</option>
+                
+            </select>
+        </div>
+        <br>
+        
+        <button (click)= "callBothFunctions()" type="submit" class="btn btn-primary center-btn" style="align-items: center;">Book</button>
+        
+
+        </form>
+      </div>
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <!-- <div (ngSubmit)="cancelBooking(TicketNo)" class="mt-4">
+        <button (click)="displayValues()" style="background-color: blueviolet;">Cancel Booking</button>
+        <div class="cancel" *ngIf="displayed">
+          <h4>Booking Details:</h4>
+      <p>User Name: {{ userName }}</p>
+      <p>Age: {{ age }}</p>
+      <p>Gender: {{ gender }}</p>
+      <p>Ticket Type: {{ ticketType }}</p>
+      <button (click)="cancelBooking(TicketNo)" type="submit" class="btn btn-danger" >Cancel</button>
+      
+      
+        
+        </div>
+      </div> -->
+    
+</body>
+<!-- </html>   -->
+
+
+

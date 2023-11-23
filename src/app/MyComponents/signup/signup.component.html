@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+  <style>
+    
+    body {
+    
+      font-family:'Times New Roman', serif;
+	    background-image: url('../../assets/img/home.jpg');
+	    background-size: cover;
+	    background-position: center;
+      height: 120vh;
+      text-align: center;
+}
+
+    .container {
+      max-width: 400px;
+      max-height: 480px;
+      margin: 70px auto;
+      padding: 5px;
+      
+    } 
+    /* h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    } */
+
+    .form-group {
+      margin-bottom:5px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      
+    }
+
+    /* .form-group button {
+      width: 50%;
+      padding: 20px;
+      font-size: 16px;
+      background-color: #4fb760;
+      color: #fff;
+      
+    } */
+
+    /* .form-group button:hover {
+      background-color: #45a049;
+    } */
+  </style>
+</head>
+<body>
+  <app-navbar></app-navbar>
+  <div class="container" style="background-color: rgba(256, 255, 255, 0.5);">
+ 
+      <h2 class style="font-family: 'Times New Roman', serif; color: rgb(8, 8, 8); font-size: 26px; font-weight: bold; text-transform: uppercase;">Register</h2>
+      <form (ngSubmit)="onSubmit()" class="mt-5">
+        <div class="form-group">
+          <label for="name" style="font-family: 'Times New Roman', serif; color: rgb(5, 5, 5); font-size: 16px; font-weight: bold; text-align: left; ">Name</label>
+          <input type="text" [(ngModel)]="username" class="form-control" id="name" name="name" style="border-radius: 0%;" placeholder="Please enter your name">
+          <!-- two-way data binding syntax that binds the value of the input field to the variable in the component -->
+        </div>
+        <div class="form-group">
+          <label for="email" style="font-family: 'Times New Roman', serif; color: rgb(10, 10, 10); font-size: 16px; font-weight: bold; text-align: left;">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" style="border-radius: 0%;"  placeholder="Please enter your email">
+        </div>
+        <div class="form-group">
+          <label for="password" style="font-family: 'Times New Roman', serif; color: rgb(4, 4, 4); font-size: 16px; font-weight: bold; text-align: left;">Password</label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"  style="border-radius: 0%;" placeholder="Please enter a password">
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword" style="font-family: 'Times New Roman', serif; color: rgb(9, 9, 9); font-size: 16px; font-weight: bold; text-align: left;">Confirm Password</label>
+          <input type="password" class="form-control" id="cPassword" name="cPassword" [(ngModel)]="cPassword" style="border-radius: 0%;" placeholder="Please re-enter your password">
+        </div>
+        <div class="form-group text-center">
+          
+          
+          <button type="submit" class="btn btn-primary">Register</button>
+          
+        </div>
+      </form>
+    </div>
+
+  </body>
+</html>

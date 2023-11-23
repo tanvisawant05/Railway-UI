@@ -1,0 +1,24 @@
+<body>
+<app-navbar></app-navbar>
+<div class="container"  style="background-color: rgb(156, 180, 234); "> 
+  <form  class="mt-4" >
+<p style="font-family: 'Times New Roman', serif; color: rgb(11, 11, 11); font-size: 24px; font-weight: bold;">Booking Details</p>
+<p>Passenger Name: {{ userName }}</p>
+<p>Passenger Age: {{ age }}</p>
+<p>Gender: {{ gender }}</p>
+<p>Email: {{ uemail }}</p>
+<p>Ticket Type: {{ ticketType }}</p>
+<p style="font-size: 12px;">Do You want to cancel your booking?</p>
+<button (click)="cancelBooking(TicketNo)">Yes</button>
+<button (click)="noCancel()">No</button>
+
+<!-- <button (click)="noCancel()" class="btn btn-primary center-btn">OK</button>
+<p (click)="cancelBooking(TicketNo)" style="font-size: 12px;">Cancel booking?</p> -->
+
+</form>
+</div>
+</body>
+
+
+
+

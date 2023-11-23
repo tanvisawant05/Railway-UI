@@ -1,0 +1,27 @@
+@media screen and (min-width:721px){
+  .formContainer{
+      width: 30%;
+      padding: 5px;
+     
+  } 
+}
+
+@media screen and (max-width:720px){
+  .formContainer{
+      width: 90%;
+  }
+}
+
+/* .table-container {
+  height: calc(100vh - 50px);
+  overflow: auto;
+  border-radius: 0px;
+} */
+
+button {
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  align-items: center;
+  height: 10vh;  
+}

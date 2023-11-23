@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <style>
+   
+    body {
+    
+      font-family: 'Times New Roman', serif;
+	    background-image: url('../../assets/img/home.jpg');
+	    background-size: cover;
+	    background-position: center;
+      /* height: 100vh; */
+      height:auto;
+      text-align: center;
+}
+ul {
+  list-style-type: none;
+  /* display:flex */
+}
+
+
+thead{
+    margin-top: 10px;
+}
+
+    </style>
+    </head>
+    <body>
+<app-navbar></app-navbar>
+
+
+
+     <div class="container">
+      
+        <div class="table-container my-5">
+          <label for="search" class="form-label" style="font-family:'Times New Roman', serif; color: rgb(10, 10, 10); font-size: 16px; font-weight: bold; text-align: left;">Search Train</label>
+      <input type="text" [(ngModel)]="searchText" class="form-control" id="search" name="search" placeholder="Please enter the Train Name">
+          
+          <br> 
+          
+          <!-- <div>
+            <select change="onTableSizeChange($event)">
+                <option *ngFor="let size of tableSizes">
+                    {{size}}
+                </option>
+
+            </select>
+          </div> -->
+     <table *ngIf="resultArray!=null && resultArray.length>0" class="table table-striped table-bordered" style=" border: 1px solid transparent;">
+        <thead>
+          <tr>
+            
+            <th [ngStyle]="{ 'background-color': backgroundColor }">Train Name</th>
+            <th [ngStyle]="{ 'background-color': backgroundColor }">From</th>
+            <th [ngStyle]="{ 'background-color': backgroundColor }">To</th>
+            <th [ngStyle]="{ 'background-color': backgroundColor }">Date</th>
+            <th [ngStyle]="{ 'background-color': backgroundColor }">Journey Time</th>
+            <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount AC1tire</th>
+            <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount AC2tire</th>
+            <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount AC3tire</th>
+            <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount Slepper</th>
+            <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount SecoundSetting</th>
+            <th></th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of resultArray | search:searchText">
+            <!-- <tr *ngFor="let row of resultArray | paginate:{
+                itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count }; let i = index"> -->
+            
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.trainName}}</td>
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.arrivalLocation}}</td>
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.destinationLocation}}</td>
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.startDate}}</td>
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.journeyTime}} hrs</td>
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.seatCount_AC1tire}}</td>
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.seatCount_AC2tire}}</td>
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.seatCount_AC3tire}}</td>
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.seatCount_Slepper}}</td>
+            <td [ngStyle]="{ 'background-color': backgroundData }">{{row.seatCount_SecoundSetting}}</td>
+                <td>
+                   
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#updateTrain" (click)="editTrainClicked(row.trainNo)">Edit</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteTrain(row.trainNo)" style="background-color:rgb(218, 84, 44)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+      </table> 
+
+
+      
+      <!-- <button type="button" class="btn btn-success my-5" style="align-items:center; border-radius: 0%;  width:30%; height: 40px;" data-bs-toggle="modal" data-bs-target="#addTraineModal">
+        Add Train
+    </button> -->
+    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTraineModal">Add Train</button>
+      </div>
+    </div>
+    
+
+ <mat-paginator #paginator [length]="100" [pageSizeOptions]="[10,20]" aiia-label="select page"></mat-paginator> 
+ <!-- <div>
+  <pagination-controls
+    previousLabel="Prev"
+    nextLabel="Next"
+    (pageChange)="onTableDataChange($event)"
+    >
+</pagination-controls>   
+</div> -->
+
+
+  <!-- Add Modal (button trigger)-->
+  
+     <div class="modal fade" id="addTraineModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add Train</h5>
+           <button type="button" id="addTrainModalClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="addTrain()" class="container">
+                <div class="mb-3">
+                    <label for="trainNo" class="form-label" style="text-align: left;">Train Number</label>
+                    <input type="text" [(ngModel)]="trainNo" class="form-control"  id="trainNo" name="trainNo">
+                </div>
+                <div class="mb-3">
+                    <label for="trainName" class="form-label" style="text-align: left;"> Train Name</label>
+                    <input type="text" [(ngModel)]="trainName" class="form-control" id="trainName" name="trainName" >
+                </div>
+                <div class="mb-3">
+                    <label for="arrivalLocation" class="form-label" style="text-align: left;">Arival Location</label>
+                    <input type="text" [(ngModel)]="arrivalLocation" class="form-control" id="arrivalLocation" name="arrivalLocation">
+                </div>
+                <div class="mb-3">
+                    <label for="destinationLocation" class="form-label" style="text-align: left;">Destination Location</label>
+                    <input type="text" [(ngModel)]="destinationLocation" class="form-control" id="destinationLocation" name="destinationLocation">
+                </div>
+                <div class="mb-3">
+                    <label for="startDate" class="form-label" style="text-align: left;">Start Date</label>
+                    <input type="datetime-local" [min]="currentDate" class="form-control" id="startDate" name="startDate"
+                        [(ngModel)]="startDate">
+                </div>
+                <div class="mb-3">
+                    <label for="journeyTime" class="form-label" style="text-align: left;">Journey Time</label>
+                    <input type="text" [(ngModel)]="journeyTime" class="form-control" id="journeyTime" name="journeyTime">
+                </div>
+                <div class="mb-3">
+                    <label for="seatCount_AC1tire" class="form-label" style="text-align: left;">AC Tire1</label>
+                    <input type="text" [(ngModel)]="seatCount_AC1tire" class="form-control" id="seatCount_AC1tire" name="seatCount_AC1tire">
+                </div>
+                <div class="mb-3">
+                    <label for="seatCount_AC2tire" class="form-label" style="text-align: left;">AC Tire2</label>
+                    <input type="text" [(ngModel)]="seatCount_AC2tire" class="form-control" id="seatCount_AC2tire" name="seatCount_AC2tire">
+                </div>
+                <div class="mb-3">
+                    <label for="seatCount_AC3tire" class="form-label" style="text-align: left;">AC Tire3</label>
+                    <input type="text" [(ngModel)]="seatCount_AC3tire" class="form-control" id="seatCount_AC3tire" name="seatCount_AC3tire">
+                </div>
+                <div class="mb-3">
+                    <label for="seatCount_Slepper" class="form-label" style="text-align: left;">Slepper</label>
+                    <input type="text" [(ngModel)]="seatCount_Slepper" class="form-control" id="seatCount_Slepper" name="seatCount_Slepper">
+                </div>
+                <div class="mb-3">
+                    <label for="seatCount_SecoundSetting" class="form-label" style="text-align: left;">SecoundSetting</label>
+                    <input type="text" [(ngModel)]="seatCount_SecoundSetting" class="form-control" id="seatCount_SecoundSetting" name="seatCount_SecoundSetting">
+                </div>
+
+                <button type="submit" class="btn btn-success">Add Train</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+<!-- Update Modal -->
+<div class="modal fade" id="updateTrain" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold; text-align: center; font-size: large;">Update Train Details</h5>
+        <button type="button" id="updateFlightModalClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form (ngSubmit)="editTrain()" class="container">
+              <div class="mb-3">
+                  <label for="trainNo" class="form-label">Train Number</label>
+                  <input type="text" [(ngModel)]="trainNo" class="form-control" id="trainNo" name="trainNo">
+              </div>
+              <div class="mb-3">
+                  <label for="trainName" class="form-label">Train Name</label>
+                  <input type="text" [(ngModel)]="trainName" class="form-control" id="trainName" name="trainName" >
+              </div>
+              <div class="mb-3">
+                  <label for="arrivalLocation" class="form-label">From</label>
+                  <input type="text" [(ngModel)]="arrivalLocation" class="form-control" id="arrivalLocation" name="arrivalLocation">
+              </div>
+              <div class="mb-3">
+                  <label for="destinationLocation" class="form-label">To</label>
+                  <input type="text" [(ngModel)]="destinationLocation" class="form-control" id="destinationLocation" name="destinationLocation">
+              </div>
+              <div class="mb-3">
+                  <label for="startDate" class="form-label">Start Date</label>
+                  <input type="datetime-local" [min]="currentDate" class="form-control" id="startDate" name="startDate"
+                      [(ngModel)]="startDate">
+              </div>
+              <div class="mb-3">
+                  <label for="eClassPrice" class="form-label">Journey Time</label>
+                  <input type="text" [(ngModel)]="journeyTime" class="form-control" id="eClassPrice" name="eClassPrice">
+              </div>
+              <div class="mb-3">
+                  <label for="seatCount_AC1tire" class="form-label">AC Tir1</label>
+                  <input type="text" [(ngModel)]="seatCount_AC1tire" class="form-control" id="seatCount_AC1tire" name="seatCount_AC1tire">
+              </div>
+              <div class="mb-3">
+                  <label for="seatCount_AC2tire" class="form-label">AC Tir2</label>
+                  <input type="text" [(ngModel)]="seatCount_AC2tire" class="form-control" id="seatCount_AC2tire" name="seatCount_AC2tire">
+              </div>
+              <div class="mb-3">
+                  <label for="seatCount_AC3tire" class="form-label">AC Tir3</label>
+                  <input type="text" [(ngModel)]="seatCount_AC3tire" class="form-control" id="seatCount_AC3tire" name="seatCount_AC3tire">
+              </div>
+              <div class="mb-3">
+                  <label for="seatCount_Slepper" class="form-label">Slepper</label>
+                  <input type="text" [(ngModel)]="seatCount_Slepper" class="form-control" id="seatCount_Slepper" name="seatCount_Slepper">
+              </div>
+              <div class="mb-3">
+                  <label for="seatCount_SecoundSetting" class="form-label">SecondSetting</label>
+                  <input type="text" [(ngModel)]="seatCount_SecoundSetting" class="form-control" id="seatCount_SecoundSetting" name="seatCount_SecoundSetting">
+              </div>
+
+              <button type="submit" class="btn btn-success">Update Details</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+
+

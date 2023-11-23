@@ -1,0 +1,34 @@
+/* booking-dialog.component.scss */
+/* .booking-dialog-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  p {
+    color: #555;
+    font-size: 18px;
+  } */
+  
+  /* .btn btn-primary btn{
+    margin-top: 20px; 
+    align-items: center; 
+
+  }*/
+  .dialog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  

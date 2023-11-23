@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <style>
+     body {
+    
+      font-family: 'Times New Roman', serif;
+	    background-image: url('../../assets/img/home.jpg');
+	    background-size: cover;
+	    background-position: center;
+      /* height: 150vh; */
+      height:auto;
+      /* width: 250vh; */
+      width: auto;
+      text-align: center;
+}
+table{ 
+  border-color: transparent;
+}
+ul {
+  list-style-type: none;
+}
+
+.my-5 container formContainer{
+  text-align: left;
+}
+.center-btn {
+  display: block;
+  margin: auto;
+ 
+}
+
+
+  </style>
+<body>
+<app-navbar></app-navbar>
+
+<div class="my-5 container formContainer" style="background-color: rgba(256, 255, 255, 0.5);">
+  <h2 class= "mb-4 text-center text-dark" style="font-family: 'Times New Roman', serif; color:none; font-size: 24px; font-weight: bold; text-transform: uppercase;">Search Trains</h2>
+ 
+    <form (ngSubmit)="onSubmit()" >
+    <div class="mb-3"  >
+     <label for="startDate" class="form-label" style="font-family: 'Times New Roman', serif; color: rgb(10, 10, 10); font-size: 16px; font-weight: bold; text-align: left">Journey Date</label>
+      <input type="date" [min]="currentDate" class="form-control" id="startDate" name="startDate" [(ngModel)]="startDate">
+    </div>
+    <div class="mb-3">
+      <label for="startLoc" class="form-label" style="font-family:'Times New Roman', serif; color: rgb(10, 10, 10); font-size: 16px; font-weight: bold; text-align: left;">Start Location</label>
+      <input type="text" [(ngModel)]="ArrivalLocation" class="form-control" id="startLoc" name="startLoc" placeholder="Please enter the Source">
+    </div>
+    <div class="mb-3">
+      <label for="endLoc" class="form-label" style="font-family: 'Times New Roman', serif; color: rgb(10, 10, 10); font-size: 16px; font-weight: bold; text-align: left;">End Location</label>
+    <input type="text" class="form-control" id="endLoc" name="endLoc" [(ngModel)]="DestinationLocation" placeholder="Please enter the Destination">
+    </div>
+
+    <button type="submit" class="btn btn-primary center-btn">Search Trains</button>
+  <!-- </div> -->
+  </form>
+</div>
+
+
+<!-- from here -->
+ <!-- <div *ngIf="resultArray != null && resultArray.length > 0">
+  <ul *ngFor="let item of resultArray">
+    <li style="background-color: bisque; width: 98%; font-weight: bold;">Train No : {{item.trainNo}}</li>
+    <li style="background-color: bisque; width: 98%; font-weight: bold;">Train Name : {{item.trainName}}</li>
+    <li style="background-color: bisque; width: 98%;">Arrival Location : {{item.arrivalLocation}}</li>
+    <li style="background-color: bisque; width: 98%;">Destination Location : {{item.destinationLocation}}</li>
+    <li style="background-color: bisque; width: 98%;">Start Date : {{item.startDate}}</li>
+    <li style="background-color: bisque; width: 98%;">Journey Time : {{item.journeyTime}}</li>
+    <li style="background-color: bisque; width: 98%;">SeatCount AC1tire : {{item.seatCount_AC1tire}}</li>
+    <li style="background-color: bisque; width: 98%;">SeatCount AC2tire : {{item.seatCount_AC2tire}}</li>
+    <li style="background-color: bisque; width: 98%;">SeatCount AC3tire : {{item.seatCount_AC3tire}}</li>
+    <li style="background-color: bisque; width: 98%;">SeatCount Slepper : {{item.seatCount_Slepper}}</li>
+    <li style="background-color: bisque; width: 98%;">SeatCount SecoundSetting : {{item.seatCount_SecoundSetting}}</li>
+    <li style="background-color: bisque; width: 98%;"><button class = "btn btn-success center-btn" (click)="bookBtn(item.trainNo)">Book</button></li>
+  </ul>
+
+ </div> -->
+
+ <div class="table-container">
+    
+  <table *ngIf="resultArray != null && resultArray.length > 0" class="table table-striped table-bordered my-5">
+   
+  <thead>
+    <tr>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">Train No</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">Train Name</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">Arrival Location</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">Destination Location</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">Start Date</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">Journey Time</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount AC1tire</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount AC2tire</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount AC3tire</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount Slepper</th>
+      <th [ngStyle]="{ 'background-color': backgroundColor }">SeatCount SecoundSetting</th>
+      <th ></th>
+      
+    </tr>
+  </thead> 
+
+  <!-- for iteration -->
+     <tbody>
+    <tr *ngFor="let item of resultArray">
+      
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.trainNo}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.trainName}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.arrivalLocation}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.destinationLocation}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.startDate}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.journeyTime}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.seatCount_AC1tire}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.seatCount_AC2tire}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.seatCount_AC3tire}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.seatCount_Slepper}}</td>
+      <td [ngStyle]="{ 'background-color': backgroundData }">{{item.seatCount_SecoundSetting}}</td>
+      <td><button class = "btn btn-primary" (click)="bookBtn(item.trainNo)">Book</button></td>
+    </tr>
+  </tbody>  
+  
+</table>
+</div>
+  
+</body>
+  
